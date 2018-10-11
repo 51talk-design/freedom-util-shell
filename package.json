@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ljcheibao/freedom-middleware-shell.git"
+    "url": "https://github.com/ljcheibao/freedom-util-shell"
   },
   "dependencies": {
     "co-mkdirp": "^0.1.0",
