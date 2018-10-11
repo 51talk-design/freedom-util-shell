@@ -1,0 +1,27 @@
+{
+  "name": "freedom-middleware-shell",
+  "version": "1.0.0",
+  "description": "简单的多平台环境的shell命令执行中间件",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "middleware",
+    "shell",
+    "freedom"
+  ],
+  "author": "liangjiecan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ljcheibao/freedom-middleware-shell.git"
+  },
+  "dependencies": {
+    "co-mkdirp": "^0.1.0",
+    "heibao-utils": "^0.0.8",
+    "mkdirp": "^0.5.1",
+    "uuid": "^3.3.2"
+  }
+}
