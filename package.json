@@ -1,7 +1,7 @@
 {
-  "name": "freedom-middleware-shell",
+  "name": "freedom-util-shell",
   "version": "1.0.0",
-  "description": "简单的多平台环境的shell命令执行中间件",
+  "description": "简单的多平台环境的shell命令执行工具",
   "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,7 @@
     "javascript",
     "middleware",
     "shell",
+    "util",
     "freedom"
   ],
   "author": "liangjiecan",
