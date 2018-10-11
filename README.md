@@ -2,6 +2,10 @@
 
 简单的shell命令执行工具，可支持在mac、linux、windows平台下使用
 
+[![npm](https://img.shields.io/npm/l/freedom-util-shell.svg)](LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/freedom-util-shell.svg)](https://www.npmjs.com/package/freedom-util-shell)
+[![npm](https://img.shields.io/npm/dt/freedom-util-shell.svg)](https://www.npmjs.com/package/freedom-util-shell)
+
 ### 如何使用
 
 - 安装
