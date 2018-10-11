@@ -1,13 +1,13 @@
-### freedom-middleware-shell
+### freedom-util-shell
 
-简单的shell命令执行中间件，可支持在mac、linux、windows平台下使用
+简单的shell命令执行工具，可支持在mac、linux、windows平台下使用
 
 ### 如何使用
 
 - 安装
 
   ```
-  cnpm/npm install freedom-middleware-shell --save
+  cnpm/npm install freedom-util-shell --save
   ```
 
 - 使用demo
