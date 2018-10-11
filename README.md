@@ -13,7 +13,7 @@
 - 使用demo
 
   ```js
-  const shell = require("freedom-middleware-shell")();
+  const shell = require("freedom-util-shell")();
 
   (async function () {
     let result = await shell.execCmd("git log", false);
