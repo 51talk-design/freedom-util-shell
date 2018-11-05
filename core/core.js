@@ -96,7 +96,8 @@ class Shell {
 
       sp.on('exit', function (code) {
         if (code > 0) reject(`invoke shell command happen Error, exit ${code}`);
-        if (fs.existsSync(shellCmdFile)) fs.unlink(shellCmdFile, () => { });
+        if (fs.existsSync(shellCmdFile) && shellCmdFile.indexOf(os.homedir()) > -1)
+          fs.unlink(shellCmdFile, () => { });
         resolve(buffer.join('').replace(/(\r\n|\r|\n)/gi, ""));
       });
     });
