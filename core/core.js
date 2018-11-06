@@ -76,6 +76,11 @@ class Shell {
     let _this = this;
     opts = opts || {};
     let args = flags || [];
+    opts = Object.assign(opts, {
+      cwd: process.cwd(),
+      shell: this.platform == "win32",
+      encoding: "utf-8"
+    });
     return new Promise(function (resolve, reject) {
       let buffer = [];
       let shellCmdFile = _this._generateTempCmdFile(shellCmds);
