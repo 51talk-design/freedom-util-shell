@@ -75,9 +75,9 @@ class Shell {
   execCmd(shellCmds, isOutput = true, opts = null, flags = null) {
     let _this = this;
     opts = opts || {};
+    opts.cwd = opts.cwd || process.cwd();
     let args = flags || [];
     opts = Object.assign(opts, {
-      cwd: process.cwd(),
       shell: this.platform == "win32",
       encoding: "utf-8"
     });
