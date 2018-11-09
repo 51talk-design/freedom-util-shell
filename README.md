@@ -59,6 +59,8 @@
   3. windows下，指定shell进程，隐式调用cmd.exe
 - 1.0.5
   1. fixed在指定命令执行目录的bug
+- 1.0.6
+  1. fixed连续执行命令出现的bug
 
 ### 备注
 

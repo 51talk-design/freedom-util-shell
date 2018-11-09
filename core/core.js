@@ -83,9 +83,10 @@ class Shell {
     });
     return new Promise(function (resolve, reject) {
       let buffer = [];
+      let flags = [].concat(_this.flags);
       let shellCmdFile = _this._generateTempCmdFile(shellCmds);
-      _this.flags.push(shellCmdFile);
-      let shellCmdArgs = _this.flags.concat(args);
+      flags.push(shellCmdFile);
+      let shellCmdArgs = flags.concat(args);
       let sp = spawn(_this.shellCmd, shellCmdArgs, opts);
       sp.stdout.on('data', function (data) {
         if (!data || data.length < 1) return;
