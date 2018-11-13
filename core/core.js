@@ -37,6 +37,31 @@ class Shell {
   }
 
   /**
+   * 获取spawn
+   * @param {boolean} isPty true为使用pty进程解析
+   * @return {object} 返回命令解析的spawn
+   */
+  getSpawn(isPty) {
+    //if (isPty) return require("ptyw.js").spawn;
+    return spawn;
+  }
+
+  /**
+   * 处理要执行的命令字符串
+   * @param {string} script 
+   * @return {string} 返回处理的命令
+   */
+  handleScript(script) {
+    if (this.platform == "win32") {
+      let characterRegExp = /\^{1}/gm;
+      if (characterRegExp.test(script)) {
+        script = script.replace(/\^/gm, "^^^^");
+      }
+    }
+    return script;
+  }
+
+  /**
    * 生成批处理shell脚步文件，比如: .bat、.sh
    * @private 内部私有方法
    * @param {string | Array} shellCmds  要执行的shell脚本，可以是数组
@@ -44,12 +69,15 @@ class Shell {
    * @return {string} 返回要执行的shell 命令字符串以及生成的.bat|.sh存储路径
    */
   _generateTempCmdFile(shellCmds, opts) {
+    let _this = this;
     if (utils.isArray(shellCmds)) {
       shellCmds = shellCmds.map(function (item) {
-        return `call ${item}`;
+        let script = _this.handleScript(item);
+        return `call ${script}`;
       });
       shellCmds = shellCmds.join(os.EOL);
     } else {
+      shellCmds = _this.handleScript(shellCmds);
       return shellCmds;
     }
     let fileExtname = this.platform == "win32" ? "bat" : "sh";
@@ -67,7 +95,8 @@ class Shell {
    * @param {boolean} isOutput 是否输出命令执行结果文本，默认为输出
    * @param {object} opts 执行shell的额外参数，比如：cwd：shell执行的目录
    *  {
-   *    cwd:""
+   *    cwd:"",
+   *    pty:true
    *  }
    * @param {Array<string>} flags 命令提示符
    * @return {string} 返回执行命令后所得到的结果
@@ -78,9 +107,10 @@ class Shell {
     opts.cwd = opts.cwd || process.cwd();
     let args = flags || [];
     opts = Object.assign(opts, {
-      shell: this.platform == "win32",
-      encoding: "utf-8"
+      windowsVerbatimArguments: this.platform == "win32"
     });
+    let isPty = false;//opts.pty == false ? false : true;
+    let spawn = this.getSpawn(isPty);
     return new Promise(function (resolve, reject) {
       let buffer = [];
       let flags = [].concat(_this.flags);
