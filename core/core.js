@@ -42,7 +42,7 @@ class Shell {
    * @return {object} 返回命令解析的spawn
    */
   getSpawn(isPty) {
-    if (isPty) return require("ptyw.js").spawn;
+    //if (isPty) return require("ptyw.js").spawn;
     return spawn;
   }
 
@@ -109,7 +109,7 @@ class Shell {
     opts.cwd = opts.cwd || process.cwd();
     let args = flags || [];
     opts = Object.assign(opts, {
-      windowsVerbatimArguments: true,
+      windowsVerbatimArguments: this.platform == "win32",
       encoding: "utf-8"
     });
     let isPty = false;//opts.pty == false ? false : true;
