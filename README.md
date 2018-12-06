@@ -61,6 +61,8 @@
   1. fixed在指定命令执行目录的bug
 - 1.0.6
   1. fixed连续执行命令出现的bug
+- 1.0.7
+  1. fixed执行多个命令，即shellCmds为Array<string>类型时，mac系统下无法执行的bug
 
 ### 备注
 
