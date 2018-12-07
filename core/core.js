@@ -117,7 +117,14 @@ class Shell {
     return new Promise(function (resolve, reject) {
       let buffer = [];
       let flags = [].concat(_this.flags);
+      if (_this.platform == "win32") {
+        shellCmds = shellCmds.replace(/^\/[a-zA-Z]\//gi, "/");
+        shellCmds = shellCmds.replace(/^\\\\[a-zA-Z]\\\\/gi, "\\\\");
+        shellCmds = shellCmds.replace(/^\\[a-zA-Z]\\/gi, "\\");
+        shellCmds = shellCmds.replace(/^[a-zA-Z]:/gi, "");
+      }
       let shellCmdFile = _this._generateTempCmdFile(shellCmds);
+      console.log(path.resolve(shellCmdFile));
       flags.push(shellCmdFile);
       let shellCmdArgs = flags.concat(args);
       let sp = spawn(_this.shellCmd, shellCmdArgs, opts);

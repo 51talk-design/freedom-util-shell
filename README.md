@@ -65,6 +65,8 @@
   1. fixed在window下执行带有 ^ 这种符号的bug
 - 1.0.8
   1. fixed执行多个命令，即shellCmds为Array<string>类型时，mac系统下无法执行的bug
+- 1.0.9
+  1. fixed在windows下面执行指定绝对路径【**/d/dev-tool/cli.bat**】的命令失败的bug
 
 ### 备注
 
