@@ -73,12 +73,26 @@ class Shell {
     if (utils.isArray(shellCmds) && shellCmds.length > 1) {
       shellCmds = shellCmds.map(function (item) {
         let script = _this.handleScript(item);
-        if (_this.platform == "win32")
+        if (_this.platform == "win32") {
+          let regExp = /^\/([a-zA-Z])\//gi;
+          if (regExp.test(script)) {
+            let dir = RegExp.$1 + ":";
+            script = script.replace(/^\/([a-zA-Z])\//gi, "");
+            script = path.join(dir, script);
+          }
           return `call ${script}`;
+        }
         else return `${script}\r\n`;
       });
       shellCmds = shellCmds.join(os.EOL);
     } else {
+      if (utils.isArray(shellCmds)) shellCmds = shellCmds[0];
+      let regExp = /^\/([a-zA-Z])\//gi;
+      if (regExp.test(shellCmds)) {
+        let dir = RegExp.$1 + ":";
+        shellCmds = shellCmds.replace(/^\/([a-zA-Z])\//gi, "");
+        shellCmds = path.join(dir, shellCmds);
+      }
       shellCmds = _this.handleScript(shellCmds);
       return shellCmds;
     }
@@ -92,7 +106,7 @@ class Shell {
   }
 
   /**
-   * 执行shell命令
+   * 执行shell命令 "ptyw.js": "^0.4.1",
    * @param {string | Array} shellCmds 要执行的shell脚本，可以是shell命令数组
    * @param {boolean} isOutput 是否输出命令执行结果文本，默认为输出
    * @param {object} opts 执行shell的额外参数，比如：cwd：shell执行的目录
@@ -117,14 +131,7 @@ class Shell {
     return new Promise(function (resolve, reject) {
       let buffer = [];
       let flags = [].concat(_this.flags);
-      if (_this.platform == "win32") {
-        shellCmds = shellCmds.replace(/^\/[a-zA-Z]\//gi, "/");
-        shellCmds = shellCmds.replace(/^\\\\[a-zA-Z]\\\\/gi, "\\\\");
-        shellCmds = shellCmds.replace(/^\\[a-zA-Z]\\/gi, "\\");
-        shellCmds = shellCmds.replace(/^[a-zA-Z]:/gi, "");
-      }
       let shellCmdFile = _this._generateTempCmdFile(shellCmds);
-      console.log(path.resolve(shellCmdFile));
       flags.push(shellCmdFile);
       let shellCmdArgs = flags.concat(args);
       let sp = spawn(_this.shellCmd, shellCmdArgs, opts);

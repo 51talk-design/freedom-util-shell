@@ -1,6 +1,6 @@
 {
   "name": "freedom-util-shell",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "简单的多平台环境的shell命令执行工具",
   "main": "./index.js",
   "scripts": {
@@ -25,7 +25,6 @@
     "heibao-utils": "^0.0.8",
     "mkdirp": "^0.5.1",
     "nan": "^2.11.1",
-    "ptyw.js": "^0.4.1",
     "uuid": "^3.3.2"
   }
 }
